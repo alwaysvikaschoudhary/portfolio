@@ -137,8 +137,6 @@ const WhatIDo = () => {
                 <div className="what-tags">Java</div>
                 <div className="what-tags">Spring Boot</div>
                 <div className="what-tags">Spring Security</div>
-                <div className="what-tags">Flutter</div>
-                <div className="what-tags">Dart</div>
                 <div className="what-tags">Servlet</div>
                 <div className="what-tags">JSP</div>
                 <div className="what-tags">JDBC</div>
@@ -146,13 +144,7 @@ const WhatIDo = () => {
                 <div className="what-tags">MySQL</div>
                 <div className="what-tags">Google Maps API</div>
                 <div className="what-tags">Google Places API</div>
-                <div className="what-tags">Google Directions API</div>
-                <div className="what-tags">Google Distance Matrix API</div>
-                <div className="what-tags">Google Elevation API</div>
                 <div className="what-tags">Google Geocoding API</div>
-                <div className="what-tags">Google Places API</div>
-                <div className="what-tags">Google Places API</div>
-                <div className="what-tags">Google Places API</div>
                 <div className="what-tags">Cloudinary</div>
                 <div className="what-tags">PostgreSQL</div>
                 <div className="what-tags">MongoDB</div>
