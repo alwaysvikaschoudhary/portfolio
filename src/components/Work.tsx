@@ -18,7 +18,34 @@ const projects = [
     image: "/images/scm.png",
     link: "https://github.com/alwaysvikaschoudhary/Smart-Contact-Manager",
   },
-  
+  {
+    title: "Food Delivery App",
+    category: "Online Food Ordering System",
+    tools: "Java, Spring Boot, Spring Security, MySQL",
+    image: "/images/foodapp.png",
+    link: "https://github.com/alwaysvikaschoudhary/Food-Delivery-App",
+  },
+  {
+    title: "Algorithm Visualizer",
+    category: "Data Structures & Algorithms Visualizer",
+    tools: "HTML, CSS, JavaScript",
+    image: "/images/algo.png",
+    link: "https://github.com/alwaysvikaschoudhary/Algorithm-Visualizer",
+  },
+  {
+    title: "Bus Reservation",
+    category: "Bus Booking Frontend Application",
+    tools: "Flutter, Dart",
+    image: "/images/bus.png",
+    link: "https://github.com/alwaysvikaschoudhary/BUS_RESERVATION_FRONTEND",
+  },
+  {
+    title: "MVC Registration",
+    category: "MVC-based User Management App",
+    tools: "Servlet, JSP, JDBC, MySQL",
+    image: "/images/mvc.png",
+    link: "https://github.com/alwaysvikaschoudhary/MVC-Registration-App",
+  },
 ];
 
 
