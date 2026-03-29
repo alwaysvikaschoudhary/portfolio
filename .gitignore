@@ -17,3 +17,7 @@ node_modules/
 # OS
 .DS_Store
 Thumbs.db
+
+# Large model files (encrypted version kept)
+public/models/character.glb
+public/models/.gitattributes
