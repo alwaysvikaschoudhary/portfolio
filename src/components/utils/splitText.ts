@@ -23,7 +23,7 @@ export default function setSplitText() {
     }
 
     const split = new SplitType(para, {
-      types: "lines, words",
+      types: "lines,words",
     });
 
     (para as any)._split = split;
@@ -49,7 +49,7 @@ export default function setSplitText() {
     }
 
     const split = new SplitType(title, {
-      types: "chars, lines",
+      types: "chars,lines",
     });
 
     (title as any)._split = split;
