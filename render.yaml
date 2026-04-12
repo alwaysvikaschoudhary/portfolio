@@ -1,7 +1,0 @@
-services:
-  - type: web
-    name: portfolio
-    env: node
-    buildCommand: npm install && npm run build
-    startCommand: npm install -g serve && serve -s dist -l 3000
-    publishDirectory: dist

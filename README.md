@@ -1,25 +1,59 @@
-# Vikas Choudhary - Portfolio Website 🚀
+# Enhanced Vite React TypeScript Template
 
-![Portfolio Preview](public/images/preview.png)
+This template includes built-in detection for missing CSS variables between your Tailwind config and CSS files.
 
-This repository contains my personal portfolio website, showcasing my projects, experience, and technical skills as a Full Stack Developer.
+## Features
 
-## Techstack 🛠️
+- **CSS Variable Detection**: Automatically detects if CSS variables referenced in `tailwind.config.cjs` are defined in `src/index.css`
+- **Enhanced Linting**: Includes ESLint, Stylelint, and custom CSS variable validation
+- **Shadcn/ui**: Pre-configured with all Shadcn components
+- **Modern Stack**: Vite + React + TypeScript + Tailwind CSS
 
-- **Backend**: Java, Spring Boot, Spring Security, JDBC, JPA, PostgreSQL, MySQL, MongoDB.
-- **Frontend**: React, TypeScript, Flutter, Dart, GSAP, ThreeJS, HTML5, CSS3, JavaScript.
-- **APIs & Tools**: Google Maps API (Places, Directions, Distance Matrix, Geocoding), Cloudinary, JWT.
+## Available Scripts
 
-## Features ✨
+```bash
+# Run all linting (includes CSS variable check)
+npm run lint
 
-- **3D Tech Stack Visualization**: Interactive 3D spheres representing my core technologies.
-- **Responsive Design**: Optimized for all devices.
-- **Smooth Navigation**: Powered by GSAP and ScrollSmoother.
-- **Project Showcase**: Carousel of my major projects with links to source code.
+# Check only CSS variables
+npm run check:css-vars
 
-## Instructions 🛠️
+# Individual linting
+npm run lint:js    # ESLint
+npm run lint:css   # Stylelint
+```
 
-This project uses GSAP Trial plugins for some animations. To host this version, you might need to replace trial plugins with the official GSAP Club plugins if applicable.
+## CSS Variable Detection
 
----
-Designed and Developed by [Vikas Choudhary](https://github.com/alwaysvikaschoudhary)
+The template includes a custom script that:
+
+1. **Parses `tailwind.config.cjs`** to find all `var(--variable)` references
+2. **Parses `src/index.css`** to find all defined CSS variables (`--variable:`)
+3. **Cross-references** them to find missing definitions
+4. **Reports undefined variables** with clear error messages
+
+### Example Output
+
+When CSS variables are missing:
+```
+❌ Undefined CSS variables found in tailwind.config.cjs:
+   --sidebar-background
+   --sidebar-foreground
+   --sidebar-primary
+
+Add these variables to src/index.css
+```
+
+When all variables are defined:
+```
+✅ All CSS variables in tailwind.config.cjs are defined
+```
+
+## How It Works
+
+The detection happens during the `npm run lint` command, which will:
+- Exit with error code 1 if undefined variables are found
+- Show exactly which variables need to be added to your CSS file
+- Integrate seamlessly with your development workflow
+
+This prevents runtime CSS issues where Tailwind classes reference undefined CSS variables.
