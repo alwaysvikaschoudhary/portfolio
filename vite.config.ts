@@ -12,6 +12,22 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
+  optimizeDeps: {
+    include: ['react', 'react-dom'],
+  },
+  build: {
+    commonjsOptions: {
+      transformMixedEsModules: true,
+      include: [/react/, /node_modules/],
+    },
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'react-vendor': ['react', 'react-dom'],
+        },
+      },
+    },
+  },
   server: {
     port: 3000,
     strictPort: true,
