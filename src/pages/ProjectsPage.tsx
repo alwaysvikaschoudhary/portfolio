@@ -51,7 +51,7 @@ export default function ProjectsPage() {
 
         {/* Projects List */}
         <div className="space-y-40">
-          {projects.map((project, index) => {
+          {projects.map((project) => {
             const isCyan = project.accent === 'cyan'
             const accentColor = isCyan ? '#00e0ca' : '#be5eed'
 
