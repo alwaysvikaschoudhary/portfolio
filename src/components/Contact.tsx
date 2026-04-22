@@ -67,7 +67,7 @@ export default function Contact() {
       className="py-24 px-6"
       style={{ background: 'linear-gradient(180deg, #0d0e14 0%, #0a0b0f 100%)' }}
     >
-      <div ref={sectionRef} className="max-w-5xl mx-auto">
+      <div ref={sectionRef} className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="mb-14 text-center">
           <p className="code-label mb-3 reveal stagger-1">contact.tsx</p>

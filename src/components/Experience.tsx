@@ -27,7 +27,7 @@ export default function Experience() {
       className="py-24 px-6"
       style={{ background: 'linear-gradient(180deg, #0a0b0f 0%, #0d0e14 100%)' }}
     >
-      <div ref={sectionRef} className="max-w-5xl mx-auto">
+      <div ref={sectionRef} className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="mb-14">
           <p className="code-label mb-3 reveal stagger-1">experience.json</p>

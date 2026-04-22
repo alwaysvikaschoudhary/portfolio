@@ -19,7 +19,7 @@ export default function ProjectsPage() {
 
   return (
     <div className="min-h-screen pb-24 px-6" style={{ background: '#0a0b0f' }}>
-      <div className="max-w-6xl mx-auto pt-32">
+      <div className="max-w-7xl mx-auto pt-32">
         {/* Back Link */}
         <Link
           to="/"

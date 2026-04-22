@@ -56,7 +56,7 @@ export default function Navbar() {
           borderBottom: scrolled ? '1px solid rgba(0,224,202,0.08)' : 'none',
         }}
       >
-        <div className="max-w-6xl mx-auto px-6 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
           {/* Logo */}
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}

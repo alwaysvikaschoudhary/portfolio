@@ -71,7 +71,7 @@ export default function Skills() {
       className="py-24 px-6"
       style={{ background: '#0a0b0f' }}
     >
-      <div ref={sectionRef} className="max-w-6xl mx-auto">
+      <div ref={sectionRef} className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-14">
           <p className="code-label mb-3 reveal">skills.config.ts</p>

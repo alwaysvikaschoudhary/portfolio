@@ -29,7 +29,7 @@ export default function About() {
 
   return (
     <section id="about" className="py-24 px-6" style={{ background: '#0a0b0f' }}>
-      <div ref={sectionRef} className="max-w-6xl mx-auto">
+      <div ref={sectionRef} className="max-w-7xl mx-auto">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Left — Text */}
           <div>

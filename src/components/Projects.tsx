@@ -70,13 +70,12 @@ export default function Projects() {
       className="py-24 px-6 overflow-hidden"
       style={{ background: 'linear-gradient(180deg, #0d0e14 0%, #0a0b0f 100%)' }}
     >
-      <div ref={sectionRef} className="max-w-6xl mx-auto relative px-12">
+      <div ref={sectionRef} className="max-w-7xl mx-auto relative px-12">
         {/* Header */}
         <div className="mb-14 flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div>
-            <p className="code-label mb-3 reveal stagger-1">projects.ts</p>
+            <h1 className="section-heading reveal stagger-2">Featured Projects</h1>
             <div className="section-divider reveal stagger-1" />
-            <h2 className="section-heading reveal stagger-2">Featured Projects</h2>
             <p
               className="mt-3 reveal stagger-3"
               style={{
@@ -109,7 +108,7 @@ export default function Projects() {
               e.currentTarget.style.background = 'rgba(255,255,255,0.03)'
             }}
           >
-            <span>view all project in detailed</span>
+            <span>View all Projects in Detailed</span>
             <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
           </Link>
         </div>
