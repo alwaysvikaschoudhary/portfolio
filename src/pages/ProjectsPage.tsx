@@ -80,11 +80,11 @@ export default function ProjectsPage() {
                   exit={{ opacity: 0, scale: 0.95 }}
                   transition={{ duration: 0.4, delay: index * 0.05 }}
                 >
-                <div className="grid lg:grid-cols-[1fr_400px] gap-16">
-                  {/* Content */}
-                  <div>
+                <div className={`${isCyan ? 'card-glow' : 'card-glow-purple'} rounded-3xl p-8 md:p-12 border border-white/5 shadow-2xl`}>
+                  {/* Top Header */}
+                  <div className="mb-10">
                     <div
-                      className="text-sm font-bold mb-2 tracking-widest uppercase"
+                      className="text-sm font-bold mb-3 tracking-widest uppercase"
                       style={{
                         fontFamily: 'JetBrains Mono, monospace',
                         color: accentColor,
@@ -93,32 +93,14 @@ export default function ProjectsPage() {
                       {project.tagline}
                     </div>
                     <h2
-                      className="text-4xl md:text-5xl font-bold mb-8"
+                      className="text-4xl md:text-5xl font-bold mb-6"
                       style={{ fontFamily: 'Space Grotesk, sans-serif', color: '#e6e6e6' }}
                     >
                       {project.name}
                     </h2>
-
-                    {/* Desktop/Mobile Image Placeholder for small screens */}
-                    <div className="lg:hidden mb-10 relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
-                      {project.image ? (
-                        <img 
-                          src={project.image} 
-                          alt={project.name} 
-                          className="w-full h-auto object-cover"
-                        />
-                      ) : (
-                        <div 
-                          className="w-full aspect-video flex items-center justify-center"
-                          style={{ background: 'rgba(255,255,255,0.02)' }}
-                        >
-                          <p className="text-[#444] font-medium tracking-widest uppercase text-xs">No Preview Available</p>
-                        </div>
-                      )}
-                    </div>
-
+                    
                     <div
-                      className="prose prose-invert mb-10"
+                      className="prose prose-invert max-w-none"
                       style={{
                         fontFamily: 'DM Sans, sans-serif',
                         color: '#a8a8a8',
@@ -127,11 +109,14 @@ export default function ProjectsPage() {
                       }}
                     >
                       <p className="mb-6">{project.description}</p>
-                      {project.fullDescription && <p>{project.fullDescription}</p>}
+                      {project.fullDescription && <p className="mb-8">{project.fullDescription}</p>}
                     </div>
+                  </div>
 
+                  {/* Middle Content: Features and Role */}
+                  <div className="grid md:grid-cols-[1fr_250px] gap-12 mb-12">
                     {project.keyFeatures && (
-                      <div className="mb-10">
+                      <div>
                         <h3
                           className="text-lg font-bold mb-4"
                           style={{ fontFamily: 'Space Grotesk, sans-serif', color: '#e6e6e6' }}
@@ -151,7 +136,7 @@ export default function ProjectsPage() {
                             >
                               <span
                                 className="flex-shrink-0 mt-2 w-1.5 h-1.5 rounded-full"
-                                style={{ background: accentColor }}
+                                style={{ background: accentColor, boxShadow: `0 0 8px ${accentColor}` }}
                               />
                               {feature}
                             </li>
@@ -160,79 +145,71 @@ export default function ProjectsPage() {
                       </div>
                     )}
 
+                    <div className="p-6 rounded-2xl border border-white/5 bg-white/[0.02] h-fit">
+                      <h3
+                        className="text-xs font-bold mb-3 tracking-wider uppercase"
+                        style={{ fontFamily: 'JetBrains Mono, monospace', color: '#888' }}
+                      >
+                        Role
+                      </h3>
+                      <p className="font-medium" style={{ fontFamily: 'DM Sans, sans-serif', color: '#e6e6e6' }}>
+                        Lead Developer
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Project Image */}
+                  <div className="relative group rounded-2xl overflow-hidden border border-white/10 shadow-2xl mb-12">
+                    {project.image ? (
+                      <img 
+                        src={project.image} 
+                        alt={project.name} 
+                        className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
+                      />
+                    ) : (
+                      <div 
+                        className="w-full aspect-video flex items-center justify-center"
+                        style={{ background: 'rgba(255,255,255,0.02)' }}
+                      >
+                        <p className="text-[#444] font-medium tracking-widest uppercase text-xs">No Preview Available</p>
+                      </div>
+                    )}
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0a0b0f]/60 via-transparent to-transparent" />
+                  </div>
+
+                  {/* Bottom Footer: Tech Stack and Links */}
+                  <div className="flex flex-col md:flex-row md:items-center justify-between gap-8 pt-8 border-t border-white/5">
+                    <div className="flex flex-wrap gap-2 max-w-2xl">
+                      {project.tech.map((t) => (
+                        <span
+                          key={t}
+                          className={isCyan ? 'tech-pill' : 'tech-pill-purple'}
+                          style={{ fontSize: '0.8rem', padding: '0.4rem 1rem' }}
+                        >
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+
                     <div className="flex flex-wrap gap-4">
                       {project.github && (
                         <a
                           href={project.github}
-                          className="btn-primary flex items-center gap-2"
+                          className="btn-secondary flex items-center gap-2 px-6"
                         >
                           <GithubIcon />
-                          View Source
+                          Source
                         </a>
                       )}
                       {project.demo && (
                         <a
                           href={project.demo}
-                          className="btn-secondary flex items-center gap-2"
+                          className="btn-primary flex items-center gap-2 px-6"
                         >
                           <ExternalLink size={18} />
                           Live Demo
                         </a>
                       )}
-                    </div>
-                  </div>
-
-                  {/* Sidebar Info */}
-                  <div className="space-y-8">
-                    {/* Large Screen Image preview */}
-                    <div className="hidden lg:block relative group rounded-2xl overflow-hidden border border-white/10 shadow-2xl mb-8">
-                      {project.image ? (
-                        <img 
-                          src={project.image} 
-                          alt={project.name} 
-                          className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105"
-                        />
-                      ) : (
-                        <div 
-                          className="w-full aspect-video flex items-center justify-center"
-                          style={{ background: 'rgba(255,255,255,0.02)' }}
-                        >
-                          <p className="text-[#444] font-medium tracking-widest uppercase text-xs">No Preview Available</p>
-                        </div>
-                      )}
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#0a0b0f] via-transparent to-transparent opacity-60" />
-                    </div>
-
-                    <div className={`${isCyan ? 'card-glow' : 'card-glow-purple'} rounded-2xl p-8`}>
-                      <h3
-                        className="text-sm font-bold mb-6 tracking-wider uppercase"
-                        style={{ fontFamily: 'JetBrains Mono, monospace', color: '#888' }}
-                      >
-                        Tech Stack
-                      </h3>
-                      <div className="flex flex-wrap gap-2">
-                        {project.tech.map((t) => (
-                          <span
-                            key={t}
-                            className={isCyan ? 'tech-pill' : 'tech-pill-purple'}
-                            style={{ fontSize: '0.8rem', padding: '0.4rem 0.8rem' }}
-                          >
-                            {t}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div className="p-8 rounded-2xl border border-[#ffffff08] bg-[#ffffff02]">
-                      <h3
-                        className="text-sm font-bold mb-4 tracking-wider uppercase"
-                        style={{ fontFamily: 'JetBrains Mono, monospace', color: '#888' }}
-                      >
-                        Role
-                      </h3>
-                      <p style={{ fontFamily: 'DM Sans, sans-serif', color: '#e6e6e6' }}>
-                        Lead Developer
-                      </p>
                     </div>
                   </div>
                 </div>
