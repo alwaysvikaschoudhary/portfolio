@@ -10,11 +10,13 @@ export interface Project {
   demo: string | null
   accent: 'cyan' | 'purple'
   image?: string
+  category: 'fullstack' | 'backend' | 'frontend' | 'flutter'
 }
 
 export const projects: Project[] = [
   {
     name: 'Smart Contact Manager',
+    category: 'fullstack',
     tagline: 'Secure Contact Management System',
     description:
       'A production-grade full-stack contact management system with user authentication, email verification, and personalized contact storage — built with Java, Spring Boot, and Spring Security.',
@@ -39,6 +41,7 @@ export const projects: Project[] = [
   },
   {
     name: 'Food Delivery App',
+    category: 'fullstack',
     tagline: 'Online Food Ordering System',
     description:
       'A full-stack food delivery platform with user authentication, restaurant listing, cart management, and order processing — end-to-end with Spring Boot and MySQL.',
@@ -63,6 +66,7 @@ export const projects: Project[] = [
   },
   {
     name: 'AI Image Generator',
+    category: 'frontend',
     tagline: 'Creative AI Art Creation',
     description:
       'An advanced AI-powered platform that generates stunning images from text descriptions, featuring user galleries and community interaction.',
@@ -78,6 +82,7 @@ export const projects: Project[] = [
   },
   {
     name: 'Crypto Dashboard',
+    category: 'frontend',
     tagline: 'Real-time Market Analytics',
     description:
       'A comprehensive cryptocurrency tracking dashboard with real-time price updates, portfolio management, and advanced chart analytics.',
@@ -91,4 +96,37 @@ export const projects: Project[] = [
     demo: '#',
     accent: 'purple',
   },
+  {
+    name: 'Task Management API',
+    category: 'backend',
+    tagline: 'Scalable Task Microservice',
+    description:
+      'A robust RESTful API for task management featuring JWT authentication, PostgreSQL storage, and comprehensive Swagger documentation.',
+    bullets: [
+      'Implemented secure JWT-based authentication and authorization.',
+      'Designed normalized database schema for efficient task and user management.',
+      'Integrated Swagger for interactive API documentation and testing.',
+    ],
+    tech: ['Node.js', 'Express', 'PostgreSQL', 'JWT', 'Swagger'],
+    github: '#',
+    demo: null,
+    accent: 'cyan',
+  },
+  {
+    name: 'Fitness Tracker App',
+    category: 'flutter',
+    tagline: 'Cross-platform Health App',
+    description:
+      'A beautiful and performant mobile application for tracking workouts, nutrition, and health metrics across iOS and Android.',
+    bullets: [
+      'Built with Flutter for a consistent native experience on both platforms.',
+      'Integrated Firebase for real-time data sync and user authentication.',
+      'Features custom animations and interactive health progress charts.',
+    ],
+    tech: ['Flutter', 'Dart', 'Firebase', 'Provider', 'SQLite'],
+    github: '#',
+    demo: null,
+    accent: 'purple',
+  },
 ]
+

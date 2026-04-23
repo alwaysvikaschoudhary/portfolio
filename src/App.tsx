@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { useScrollRevealAll } from './hooks/useScrollReveal'
+import { useLocation } from '@tanstack/react-router'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import About from './components/About'
@@ -40,6 +41,19 @@ function CursorGlow() {
 
 function App() {
   useScrollRevealAll()
+  const location = useLocation()
+
+  useEffect(() => {
+    if (location.hash) {
+      const sectionId = location.hash
+      const el = document.getElementById(sectionId)
+      if (el) {
+        setTimeout(() => {
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        }, 100)
+      }
+    }
+  }, [location.hash])
 
   return (
     <div

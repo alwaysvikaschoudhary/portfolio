@@ -1,8 +1,12 @@
-import { useEffect } from 'react'
-import { Link } from '@tanstack/react-router'
-import { ArrowLeft, ExternalLink } from 'lucide-react'
+import { useEffect, useState } from 'react'
+import { ExternalLink } from 'lucide-react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { useScrollRevealAll } from '../hooks/useScrollReveal'
+import Navbar from '../components/Navbar'
 import { projects } from '../lib/projectsData'
+
+const categories = ['all', 'fullstack', 'backend', 'frontend', 'flutter'] as const
+type Category = (typeof categories)[number]
 
 const GithubIcon = () => (
   <svg width={20} height={20} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -12,6 +16,11 @@ const GithubIcon = () => (
 
 export default function ProjectsPage() {
   useScrollRevealAll()
+  const [selectedCategory, setSelectedCategory] = useState<Category>('all')
+
+  const filteredProjects = selectedCategory === 'all'
+    ? projects
+    : projects.filter((p) => p.category === selectedCategory)
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -19,44 +28,58 @@ export default function ProjectsPage() {
 
   return (
     <div className="min-h-screen pb-24 px-6" style={{ background: '#0a0b0f' }}>
-      <div className="max-w-7xl mx-auto pt-32">
-        {/* Back Link */}
-        <Link
-          to="/"
-          className="inline-flex items-center gap-2 mb-12 text-[#888] hover:text-[#00e0ca] transition-colors group"
+      <Navbar />
+      <div className="max-w-7xl mx-auto pt-20">
+        {/* Category Filter */}
+        <div 
+          className="sticky top-16 z-30 mb-12 flex flex-wrap gap-3 justify-center py-6 animate-fade-in-up" 
+          style={{ 
+            animationDelay: '0.4s',
+            background: 'linear-gradient(to bottom, #0a0b0f 80%, transparent)',
+            backdropFilter: 'blur(12px)',
+            WebkitBackdropFilter: 'blur(12px)',
+          }}
         >
-          <ArrowLeft size={18} className="transition-transform group-hover:-translate-x-1" />
-          <span style={{ fontFamily: 'Space Grotesk, sans-serif', fontWeight: 500 }}>Back to Portfolio</span>
-        </Link>
-
-        {/* Header */}
-        <div className="mb-20">
-          <p className="code-label mb-3 animate-fade-in-up" style={{ animationDelay: '0.1s' }}>projects_detailed.v1</p>
-          <div className="section-divider animate-fade-in-up" style={{ animationDelay: '0.15s' }} />
-          <h1 className="section-heading mb-6 animate-fade-in-up" style={{ animationDelay: '0.2s', fontSize: '3.5rem' }}>
-            Detailed Projects
-          </h1>
-          <p
-            className="text-xl max-w-2xl animate-fade-in-up"
-            style={{
-              fontFamily: 'DM Sans, sans-serif',
-              color: '#a8a8a8',
-              lineHeight: 1.6,
-              animationDelay: '0.3s'
-            }}
-          >
-            A deeper dive into the architecture, challenges, and solutions behind my technical projects.
-          </p>
+          {categories.map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setSelectedCategory(cat)}
+              className="relative px-6 py-2 rounded-full text-sm font-medium transition-all duration-300"
+              style={{
+                fontFamily: 'Space Grotesk, sans-serif',
+                color: selectedCategory === cat ? '#00e0ca' : '#888',
+                background: selectedCategory === cat ? 'rgba(0, 224, 202, 0.1)' : 'rgba(255, 255, 255, 0.03)',
+                border: `1px solid ${selectedCategory === cat ? 'rgba(0, 224, 202, 0.3)' : 'rgba(255, 255, 255, 0.08)'}`,
+              }}
+            >
+              {cat.charAt(0).toUpperCase() + cat.slice(1)}
+              {selectedCategory === cat && (
+                <motion.div
+                  layoutId="activeTab"
+                  className="absolute inset-0 rounded-full border border-[#00e0ca] pointer-events-none"
+                  transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
+                />
+              )}
+            </button>
+          ))}
         </div>
 
         {/* Projects List */}
-        <div className="space-y-40">
-          {projects.map((project) => {
-            const isCyan = project.accent === 'cyan'
-            const accentColor = isCyan ? '#00e0ca' : '#be5eed'
+        <div className="space-y-35">
+          <AnimatePresence mode="popLayout">
+            {filteredProjects.map((project, index) => {
+              const isCyan = project.accent === 'cyan'
+              const accentColor = isCyan ? '#00e0ca' : '#be5eed'
 
-            return (
-              <div key={project.name} className="reveal">
+              return (
+                <motion.div
+                  key={project.name}
+                  layout
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 0.4, delay: index * 0.05 }}
+                >
                 <div className="grid lg:grid-cols-[1fr_400px] gap-16">
                   {/* Content */}
                   <div>
@@ -213,9 +236,10 @@ export default function ProjectsPage() {
                     </div>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             )
           })}
+          </AnimatePresence>
         </div>
       </div>
     </div>
