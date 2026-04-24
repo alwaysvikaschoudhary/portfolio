@@ -84,6 +84,7 @@ const GithubIcon = () => (
 export default function ProjectsPage() {
   useScrollRevealAll()
   const [selectedCategory, setSelectedCategory] = useState<Category>('all')
+  const [isVisible, setIsVisible] = useState(true)
 
   const filteredProjects = selectedCategory === 'all'
     ? projects
@@ -91,50 +92,90 @@ export default function ProjectsPage() {
 
   useEffect(() => {
     window.scrollTo(0, 0)
+
+    let lastScroll = 0
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY
+      if (currentScrollY > lastScroll && currentScrollY > 150) {
+        setIsVisible(false) // Scrolling down
+      } else {
+        setIsVisible(true) // Scrolling up
+      }
+      lastScroll = currentScrollY
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
   return (
-    <div className="min-h-screen pb-24 px-6" style={{ background: '#0a0b0f' }}>
+    <div className="bg-[#0a0b0f] w-full">
       <Navbar />
-      <div className="max-w-7xl mx-auto pt-20">
-        {/* Category Filter */}
-        <div 
-          className="sticky top-16 z-30 mb-12 flex flex-wrap gap-3 justify-center py-6 animate-fade-in-up" 
-          style={{ 
-            animationDelay: '0.4s',
-            background: 'linear-gradient(to bottom, #0a0b0f 80%, transparent)',
-            backdropFilter: 'blur(12px)',
-            WebkitBackdropFilter: 'blur(12px)',
-          }}
-        >
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setSelectedCategory(cat)}
-              className="relative px-6 py-2 rounded-full text-sm font-medium transition-all duration-300"
-              style={{
-                fontFamily: 'Space Grotesk, sans-serif',
-                color: selectedCategory === cat ? '#00e0ca' : '#888',
-                background: selectedCategory === cat ? 'rgba(0, 224, 202, 0.1)' : 'rgba(255, 255, 255, 0.03)',
-                border: `1px solid ${selectedCategory === cat ? 'rgba(0, 224, 202, 0.3)' : 'rgba(255, 255, 255, 0.08)'}`,
-              }}
+      <div className="pt-32 px-6 pb-24">
+        {/* Page Header */}
+        <div className="max-w-7xl mx-auto px-6 mb-16">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <h1 className="section-heading mb-4">Detailed Portfolio</h1>
+            <div className="section-divider mb-6" />
+            <p 
+              className="text-lg max-w-2xl"
+              style={{ fontFamily: 'DM Sans, sans-serif', color: '#888', lineHeight: 1.6 }}
             >
-              {cat.charAt(0).toUpperCase() + cat.slice(1)}
-              {selectedCategory === cat && (
-                <motion.div
-                  layoutId="activeTab"
-                  className="absolute inset-0 rounded-full border border-[#00e0ca] pointer-events-none"
-                  transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
-                />
-              )}
-            </button>
-          ))}
+              A deep dive into my professional projects, showcasing architecture, technical challenges, and implementation details across various domains.
+            </p>
+          </motion.div>
         </div>
 
-        {/* Projects List */}
-        <div className="space-y-35">
-          <AnimatePresence mode="popLayout">
-            {filteredProjects.map((project, index) => {
+        {/* Category Filter */}
+        <motion.div 
+          initial={false}
+          animate={{ 
+            top: isVisible ? 70 : -100,
+            opacity: isVisible ? 1 : 0 
+          }}
+          transition={{ duration: 0.3, ease: 'easeInOut' }}
+          className="sticky z-40 mb-16 py-6 bg-[#0a0b0f]/80 backdrop-blur-xl border-b border-white/5"
+        >
+          <motion.div 
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="max-w-7xl mx-auto px-6 flex flex-wrap gap-3 justify-center"
+          >
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setSelectedCategory(cat)}
+                className="relative px-6 py-2 rounded-full text-sm font-medium transition-all duration-300"
+                style={{
+                  fontFamily: 'Space Grotesk, sans-serif',
+                  color: selectedCategory === cat ? '#00e0ca' : '#888',
+                  background: selectedCategory === cat ? 'rgba(0, 224, 202, 0.1)' : 'rgba(255, 255, 255, 0.03)',
+                  border: `1px solid ${selectedCategory === cat ? 'rgba(0, 224, 202, 0.3)' : 'rgba(255, 255, 255, 0.08)'}`,
+                }}
+              >
+                {cat.charAt(0).toUpperCase() + cat.slice(1)}
+                {selectedCategory === cat && (
+                  <motion.div
+                    layoutId="activeTab"
+                    className="absolute inset-0 rounded-full border border-[#00e0ca] pointer-events-none"
+                    transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
+                  />
+                )}
+              </button>
+            ))}
+          </motion.div>
+        </motion.div>
+
+        <div className="max-w-7xl mx-auto px-6">
+          {/* Projects List */}
+          <div className="space-y-35">
+            <AnimatePresence mode="popLayout">
+              {filteredProjects.map((project, index) => {
               const isCyan = project.accent === 'cyan'
               const accentColor = isCyan ? '#00e0ca' : '#be5eed'
 
@@ -271,5 +312,6 @@ export default function ProjectsPage() {
         </div>
       </div>
     </div>
+  </div>
   )
 }
