@@ -1,12 +1,79 @@
 import { useEffect, useState } from 'react'
-import { ExternalLink } from 'lucide-react'
+import { ExternalLink, ChevronLeft, ChevronRight } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useScrollRevealAll } from '../hooks/useScrollReveal'
 import Navbar from '../components/Navbar'
-import { projects } from '../lib/projectsData'
+import { projects, type Project } from '../lib/projectsData'
 
 const categories = ['all', 'fullstack', 'backend', 'frontend', 'flutter'] as const
 type Category = (typeof categories)[number]
+
+const ProjectGallery = ({ project }: { project: Project }) => {
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const images = project.images || (project.image ? [project.image] : [])
+  
+  if (images.length === 0) {
+    return (
+      <div 
+        className="w-full aspect-video flex items-center justify-center rounded-2xl border border-white/10"
+        style={{ background: 'rgba(255,255,255,0.02)' }}
+      >
+        <p className="text-[#444] font-medium tracking-widest uppercase text-xs">No Preview Available</p>
+      </div>
+    )
+  }
+
+  const next = () => setCurrentIndex((prev) => (prev + 1) % images.length)
+  const prev = () => setCurrentIndex((prev) => (prev - 1 + images.length) % images.length)
+
+  return (
+    <div className="relative group rounded-2xl overflow-hidden border border-white/10 shadow-2xl mb-12 bg-[#0a0b0f]">
+      <div className="relative aspect-video overflow-hidden">
+        <AnimatePresence mode="wait">
+          <motion.img
+            key={currentIndex}
+            src={images[currentIndex]}
+            alt={`${project.name} preview ${currentIndex + 1}`}
+            initial={{ opacity: 0, scale: 1.1 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.9 }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+          />
+        </AnimatePresence>
+
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0b0f]/60 via-transparent to-transparent pointer-events-none" />
+
+        {images.length > 1 && (
+          <>
+            <button 
+              onClick={(e) => { e.stopPropagation(); prev(); }}
+              className="absolute left-6 top-1/2 -translate-y-1/2 p-3 rounded-full bg-white/5 text-white opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-white/10 backdrop-blur-xl border border-white/10 hover:scale-110 active:scale-95 z-10"
+            >
+              <ChevronLeft size={24} />
+            </button>
+            <button 
+              onClick={(e) => { e.stopPropagation(); next(); }}
+              className="absolute right-6 top-1/2 -translate-y-1/2 p-3 rounded-full bg-white/5 text-white opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-white/10 backdrop-blur-xl border border-white/10 hover:scale-110 active:scale-95 z-10"
+            >
+              <ChevronRight size={24} />
+            </button>
+            
+            <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-3 z-10">
+              {images.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={(e) => { e.stopPropagation(); setCurrentIndex(i); }}
+                  className={`h-1.5 rounded-full transition-all duration-500 ${i === currentIndex ? 'bg-[#00e0ca] w-10 shadow-[0_0_12px_rgba(0,224,202,0.5)]' : 'bg-white/20 w-4 hover:bg-white/40'}`}
+                />
+              ))}
+            </div>
+          </>
+        )}
+      </div>
+    </div>
+  )
+}
 
 const GithubIcon = () => (
   <svg width={20} height={20} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -158,24 +225,8 @@ export default function ProjectsPage() {
                     </div>
                   </div>
 
-                  {/* Project Image */}
-                  <div className="relative group rounded-2xl overflow-hidden border border-white/10 shadow-2xl mb-12">
-                    {project.image ? (
-                      <img 
-                        src={project.image} 
-                        alt={project.name} 
-                        className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
-                      />
-                    ) : (
-                      <div 
-                        className="w-full aspect-video flex items-center justify-center"
-                        style={{ background: 'rgba(255,255,255,0.02)' }}
-                      >
-                        <p className="text-[#444] font-medium tracking-widest uppercase text-xs">No Preview Available</p>
-                      </div>
-                    )}
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0a0b0f]/60 via-transparent to-transparent" />
-                  </div>
+                  {/* Project Gallery */}
+                  <ProjectGallery project={project} />
 
                   {/* Bottom Footer: Tech Stack and Links */}
                   <div className="flex flex-col md:flex-row md:items-center justify-between gap-8 pt-8 border-t border-white/5">

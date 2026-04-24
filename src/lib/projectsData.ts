@@ -1,3 +1,10 @@
+import scmHome from '../assets/scm/Home.png'
+import scmContact from '../assets/scm/Contact.png'
+import scmProfile from '../assets/scm/Profile.png'
+import scmFeatures from '../assets/scm/Features.png'
+import scmLogin from '../assets/scm/Login.png'
+import scmService from '../assets/scm/Service.png'
+
 export interface Project {
   name: string
   tagline: string
@@ -10,6 +17,7 @@ export interface Project {
   demo: string | null
   accent: 'cyan' | 'purple'
   image?: string
+  images?: string[]
   category: 'fullstack' | 'backend' | 'frontend' | 'flutter'
 }
 
@@ -37,7 +45,8 @@ export const projects: Project[] = [
     github: '#',
     demo: null,
     accent: 'cyan',
-    image: '/scm-dashboard.png'
+    image: scmHome,
+    images: [scmHome, scmFeatures, scmService, scmLogin, scmContact, scmProfile]
   },
   {
     name: 'Food Delivery App',
