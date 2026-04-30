@@ -173,7 +173,7 @@ export default function ProjectsPage() {
 
         <div className="max-w-7xl mx-auto px-6">
           {/* Projects List */}
-          <div className="space-y-35">
+          <div className="flex flex-col gap-8">
             <AnimatePresence mode="popLayout">
               {filteredProjects.map((project, index) => {
               const isCyan = project.accent === 'cyan'

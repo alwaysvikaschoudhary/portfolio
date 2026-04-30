@@ -5,6 +5,20 @@ import scmFeatures from '../assets/scm/Features.png'
 import scmLogin from '../assets/scm/Login.png'
 import scmService from '../assets/scm/Service.png'
 
+import ffHome from '../assets/foodfrenzy/Home.png'
+import ffRegister from '../assets/foodfrenzy/Register.png'
+import ffLogin from '../assets/foodfrenzy/Login.png'
+import ffMenu from '../assets/foodfrenzy/Menu.png'
+import ffAddToCart from '../assets/foodfrenzy/AddToCart.png'
+import ffCart from '../assets/foodfrenzy/Cart.png'
+import ffQuantity from '../assets/foodfrenzy/Quantity.png'
+import ffCheckout from '../assets/foodfrenzy/Checkout.png'
+import ffHistory from '../assets/foodfrenzy/History.png'
+import ffAdminDashboard from '../assets/foodfrenzy/AdminDashboard.png'
+import ffUserManagement from '../assets/foodfrenzy/UserManagement.png'
+import ffInventory from '../assets/foodfrenzy/Inventory.png'
+import ffUpload from '../assets/foodfrenzy/Upload.png'
+
 export interface Project {
   name: string
   tagline: string
@@ -49,7 +63,7 @@ export const projects: Project[] = [
     images: [scmHome, scmFeatures, scmService, scmLogin, scmContact, scmProfile]
   },
   {
-    name: 'Food Delivery App',
+    name: 'FoodFrenzy',
     category: 'fullstack',
     tagline: 'Online Food Ordering System',
     description:
@@ -67,11 +81,26 @@ export const projects: Project[] = [
       'Structured data storage using MySQL for users, restaurants, and orders.',
       'Dynamic UI rendering for a responsive user experience.'
     ],
-    tech: ['Java', 'Spring Boot', 'Spring Security', 'REST APIs', 'MySQL'],
+    tech: ['Java', 'Spring Boot', 'Spring Security', 'PostgreSQL', 'Cloudinary', 'Thymeleaf'],
     github: '#',
     demo: null,
     accent: 'purple',
-    image: '/scm-dashboard.png' // Using same image as placeholder
+    image: ffHome,
+    images: [
+      ffHome, 
+      ffRegister, 
+      ffLogin, 
+      ffMenu, 
+      ffAddToCart, 
+      ffCart, 
+      ffQuantity, 
+      ffCheckout, 
+      ffHistory, 
+      ffAdminDashboard, 
+      ffUserManagement, 
+      ffInventory, 
+      ffUpload
+    ]
   },
   {
     name: 'AI Image Generator',
