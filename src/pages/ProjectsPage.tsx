@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import { ExternalLink, ChevronLeft, ChevronRight } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useScrollRevealAll } from '../hooks/useScrollReveal'
@@ -9,7 +9,7 @@ const categories = ['all', 'fullstack', 'backend', 'frontend', 'flutter'] as con
 type Category = (typeof categories)[number]
 
 const ProjectGallery = ({ project }: { project: Project }) => {
-  const [currentIndex, setCurrentIndex] = useState(0)
+  const [[page, direction], setPage] = useState([0, 0])
   const images = project.images || (project.image ? [project.image] : [])
   
   if (images.length === 0) {
@@ -23,48 +23,86 @@ const ProjectGallery = ({ project }: { project: Project }) => {
     )
   }
 
-  const next = () => setCurrentIndex((prev) => (prev + 1) % images.length)
-  const prev = () => setCurrentIndex((prev) => (prev - 1 + images.length) % images.length)
+  // Wrap index to always be within bounds
+  const currentIndex = ((page % images.length) + images.length) % images.length
+
+  const paginate = useCallback((newDirection: number) => {
+    setPage([page + newDirection, newDirection])
+  }, [page])
+
+  const next = useCallback(() => paginate(1), [paginate])
+  const prev = useCallback(() => paginate(-1), [paginate])
+
+  const setExactPage = (index: number) => {
+    setPage([index, index > currentIndex ? 1 : -1])
+  }
+
+  useEffect(() => {
+    if (images.length <= 1) return
+    const timer = setInterval(next, 4000)
+    return () => clearInterval(timer)
+  }, [images.length, next])
+
+  const slideVariants = {
+    enter: (direction: number) => ({
+      x: direction > 0 ? '100%' : '-100%',
+      opacity: 1,
+    }),
+    center: {
+      zIndex: 1,
+      x: 0,
+      opacity: 1,
+    },
+    exit: (direction: number) => ({
+      zIndex: 0,
+      x: direction < 0 ? '100%' : '-100%',
+      opacity: 1,
+    })
+  }
 
   return (
     <div className="relative group rounded-2xl overflow-hidden border border-white/10 shadow-2xl mb-12 bg-[#0a0b0f]">
-      <div className="relative aspect-video overflow-hidden">
-        <AnimatePresence mode="wait">
+      <div className="relative aspect-video overflow-hidden flex items-center justify-center bg-black/40">
+        <AnimatePresence initial={false} custom={direction}>
           <motion.img
-            key={currentIndex}
+            key={page}
             src={images[currentIndex]}
+            custom={direction}
+            variants={slideVariants}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            transition={{
+              x: { type: "tween", duration: 0.6, ease: [0.33, 1, 0.68, 1] }
+            }}
+            className="absolute w-full h-full object-contain"
             alt={`${project.name} preview ${currentIndex + 1}`}
-            initial={{ opacity: 0, scale: 1.1 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.9 }}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
           />
         </AnimatePresence>
 
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0b0f]/60 via-transparent to-transparent pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0b0f]/80 via-transparent to-transparent pointer-events-none z-10" />
 
         {images.length > 1 && (
           <>
             <button 
               onClick={(e) => { e.stopPropagation(); prev(); }}
-              className="absolute left-6 top-1/2 -translate-y-1/2 p-3 rounded-full bg-white/5 text-white opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-white/10 backdrop-blur-xl border border-white/10 hover:scale-110 active:scale-95 z-10"
+              className="absolute left-4 top-1/2 -translate-y-1/2 p-2 md:p-3 rounded-full bg-black/60 text-white opacity-80 hover:opacity-100 transition-all duration-300 backdrop-blur-xl border border-white/20 hover:scale-110 active:scale-95 z-20"
             >
               <ChevronLeft size={24} />
             </button>
             <button 
               onClick={(e) => { e.stopPropagation(); next(); }}
-              className="absolute right-6 top-1/2 -translate-y-1/2 p-3 rounded-full bg-white/5 text-white opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-white/10 backdrop-blur-xl border border-white/10 hover:scale-110 active:scale-95 z-10"
+              className="absolute right-4 top-1/2 -translate-y-1/2 p-2 md:p-3 rounded-full bg-black/60 text-white opacity-80 hover:opacity-100 transition-all duration-300 backdrop-blur-xl border border-white/20 hover:scale-110 active:scale-95 z-20"
             >
               <ChevronRight size={24} />
             </button>
             
-            <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-3 z-10">
+            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-20 flex-wrap justify-center w-full px-12">
               {images.map((_, i) => (
                 <button
                   key={i}
-                  onClick={(e) => { e.stopPropagation(); setCurrentIndex(i); }}
-                  className={`h-1.5 rounded-full transition-all duration-500 ${i === currentIndex ? 'bg-[#00e0ca] w-10 shadow-[0_0_12px_rgba(0,224,202,0.5)]' : 'bg-white/20 w-4 hover:bg-white/40'}`}
+                  onClick={(e) => { e.stopPropagation(); setExactPage(i); }}
+                  className={`h-1.5 rounded-full transition-all duration-500 ${i === currentIndex ? 'bg-[#00e0ca] w-8 shadow-[0_0_12px_rgba(0,224,202,0.5)]' : 'bg-white/30 w-3 hover:bg-white/60'}`}
                 />
               ))}
             </div>

@@ -19,6 +19,16 @@ import ffUserManagement from '../assets/foodfrenzy/UserManagement.png'
 import ffInventory from '../assets/foodfrenzy/Inventory.png'
 import ffUpload from '../assets/foodfrenzy/Upload.png'
 
+import vfDoctor from '../assets/vitaflow/doctor.jpg'
+import vfDonation from '../assets/vitaflow/donation.jpg'
+import vfHistory from '../assets/vitaflow/history.jpg'
+import vfHome from '../assets/vitaflow/home.jpg'
+import vfProfiles from '../assets/vitaflow/profiles.jpg'
+import vfProgress from '../assets/vitaflow/progess.jpg'
+import vfRequest from '../assets/vitaflow/request.jpg'
+import vfTracking from '../assets/vitaflow/tracking.jpg'
+import vfVitaflow from '../assets/vitaflow/vitaflow.jpg'
+
 export interface Project {
   name: string
   tagline: string
@@ -36,6 +46,42 @@ export interface Project {
 }
 
 export const projects: Project[] = [
+  {
+    name: 'VitaFlow',
+    category: 'flutter',
+    tagline: 'Smart Blood Donation & Delivery System',
+    description:
+      'A real-time, role-based platform that connects Donors, Doctors, and Riders to ensure fast and reliable blood delivery with live tracking.',
+    fullDescription: 'VitaFlow provides a smart matching system between donors and emergency requests, featuring a rider-based delivery system with real-time location tracking and secure OTP-based verification. It uses a robust Flutter frontend and a Spring Boot backend, facilitating seamless coordination between Doctors, Donors, and Riders.',
+    bullets: [
+      'Role-based workflows for Donors, Doctors, and Riders.',
+      'Real-time location tracking via Google Maps SDK.',
+      'Secure OTP authentication (SMS) using Twilio.',
+    ],
+    keyFeatures: [
+      'Smart matching between donors and requests.',
+      'Delivery lifecycle tracking with real-time navigation.',
+      'Secure OTP Authentication (SMS).',
+      'Role-Based Dashboards.',
+      'History Tracking for all roles.'
+    ],
+    tech: ['Flutter', 'Spring Boot', 'PostgreSQL', 'Google Maps', 'Spring Security', 'Twilio'],
+    github: '#',
+    demo: null,
+    accent: 'cyan',
+    image: vfVitaflow,
+    images: [
+      vfVitaflow,
+      vfHome,
+      vfDoctor,
+      vfDonation,
+      vfRequest,
+      vfTracking,
+      vfProgress,
+      vfProfiles,
+      vfHistory
+    ]
+  },
   {
     name: 'Smart Contact Manager',
     category: 'fullstack',
