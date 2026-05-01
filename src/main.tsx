@@ -11,6 +11,7 @@ import {
 } from '@tanstack/react-router'
 import App from './App'
 import ProjectsPage from './pages/ProjectsPage'
+import SocialLinks from './components/SocialLinks'
 import './index.css'
 
 const queryClient = new QueryClient()
@@ -20,6 +21,7 @@ const rootRoute = createRootRoute({
   component: () => (
     <>
       <Outlet />
+      <SocialLinks />
       <Toaster />
     </>
   ),
