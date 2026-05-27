@@ -72,21 +72,11 @@ export const projects: Project[] = [
       'History Tracking for all roles.'
     ],
     tech: ['Flutter', 'Spring Boot', 'PostgreSQL', 'Google Maps', 'Spring Security', 'Twilio'],
-    github: '#',
+    github: 'https://github.com/alwaysvikaschoudhary/Vita_Flow',
     demo: null,
     accent: 'cyan',
     image: vfVitaflow,
-    images: [
-      vfVitaflow,
-      vfHome,
-      vfDoctor,
-      vfDonation,
-      vfRequest,
-      vfTracking,
-      vfProgress,
-      vfProfiles,
-      vfHistory
-    ]
+    images: [vfVitaflow, vfHome, vfDoctor, vfDonation, vfRequest, vfTracking, vfProgress, vfProfiles, vfHistory]
   },
   {
     name: 'Smart Contact Manager',
@@ -108,7 +98,7 @@ export const projects: Project[] = [
       'Profile management and secure login mechanisms.'
     ],
     tech: ['Java', 'Spring Boot', 'Spring Security', 'MySQL', 'Hibernate', 'Mailtrap'],
-    github: '#',
+    github: 'https://github.com/alwaysvikaschoudhary/Smart_Contact_Manager',
     demo: null,
     accent: 'cyan',
     image: scmHome,
@@ -134,25 +124,11 @@ export const projects: Project[] = [
       'Dynamic UI rendering for a responsive user experience.'
     ],
     tech: ['Java', 'Spring Boot', 'Spring Security', 'PostgreSQL', 'Cloudinary', 'Thymeleaf'],
-    github: '#',
+    github: 'https://github.com/alwaysvikaschoudhary/FoodFrenzy',
     demo: null,
     accent: 'purple',
     image: ffHome,
-    images: [
-      ffHome, 
-      ffRegister, 
-      ffLogin, 
-      ffMenu, 
-      ffAddToCart, 
-      ffCart, 
-      ffQuantity, 
-      ffCheckout, 
-      ffHistory, 
-      ffAdminDashboard, 
-      ffUserManagement, 
-      ffInventory, 
-      ffUpload
-    ]
+    images: [ffHome, ffRegister, ffLogin, ffMenu, ffAddToCart, ffCart, ffQuantity, ffCheckout, ffHistory, ffAdminDashboard, ffUserManagement, ffInventory, ffUpload]
   },
   {
     name: 'BusGo',
