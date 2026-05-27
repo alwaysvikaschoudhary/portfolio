@@ -29,6 +29,12 @@ import vfRequest from '../assets/vitaflow/request.jpg'
 import vfTracking from '../assets/vitaflow/tracking.jpg'
 import vfVitaflow from '../assets/vitaflow/vitaflow.jpg'
 
+import bgHome from '../assets/busgo/home.jpg'
+import bgLogin from '../assets/busgo/login.jpg'
+import bgProfile from '../assets/busgo/profile.jpg'
+import bgBooking from '../assets/busgo/booking.jpg'
+import bgPayment from '../assets/busgo/payment.jpg'
+
 export interface Project {
   name: string
   tagline: string
@@ -39,7 +45,7 @@ export interface Project {
   tech: string[]
   github: string
   demo: string | null
-  accent: 'cyan' | 'purple'
+  accent: 'cyan' | 'purple' | 'blue' | 'pink' | 'orange' | 'green' | 'red' | 'yellow' | 'indigo' | 'teal' | 'lime' | 'pink'
   image?: string
   images?: string[]
   category: 'fullstack' | 'backend' | 'frontend' | 'flutter'
@@ -147,6 +153,32 @@ export const projects: Project[] = [
       ffInventory, 
       ffUpload
     ]
+  },
+  {
+    name: 'BusGo',
+    category: 'flutter',
+    tagline: 'Premium Bus Reservation Application',
+    description:
+      'A modern, responsive, and cross-platform mobile application for bus reservations — built with Flutter, Dart, and Provider for state management.',
+    fullDescription: 'BusGo is a comprehensive frontend solution designed to deliver a seamless bus booking experience. It features an intuitive search interface, dynamic interactive seat selection layouts, and secure passenger detail handling. The application follows a clean, modular architecture utilizing the Provider pattern, ensuring scalable state management and decoupled UI components. Built with a focus on premium UI/UX, it incorporates Shimmer loading effects and smooth page transitions.',
+    bullets: [
+      'Interactive and dynamic visual seat selection with real-time state updates.',
+      'Comprehensive booking flows including search, passenger details, and payment confirmation.',
+      'Premium UI/UX implementation utilizing Shimmer loading skeletons and smooth transitions.',
+    ],
+    keyFeatures: [
+      'Intuitive Bus Search between cities with advanced date filtering.',
+      'Dynamic visual seat layouts for precise seat selection.',
+      'Booking Management system to view past, active, and cancelled trips.',
+      'Scalable state management powered by the Provider pattern.',
+      'Cross-platform codebase compatible with both iOS and Android.'
+    ],
+    tech: ['Flutter', 'Dart', 'Provider', 'Shimmer', 'Google Fonts'],
+    github: 'https://github.com/alwaysvikaschoudhary/BusGo',
+    demo: null,
+    accent: 'blue',
+    image: bgBooking,
+    images: [bgHome, bgLogin, bgProfile, bgBooking, bgPayment]
   },
   {
     name: 'AI Image Generator',
