@@ -246,9 +246,6 @@ export default function Contact() {
           <span style={{ color: '#00e0ca' }}>{'/'}</span>
           <span style={{ color: '#be5eed' }}>{'>'}</span>
         </p>
-        <p style={{ display: "none" }}>
-          Impact-Site-Verification: 0559eb32-6182-4b40-a64d-5c8a6289fe75
-        </p>
         <p
           className="mt-2"
           style={{
