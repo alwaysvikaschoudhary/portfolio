@@ -291,7 +291,7 @@ export default function Hero() {
         >
           B.Tech IT student at IIIT Una building production-grade full-stack systems with React,
           Spring Boot & RESTful APIs. Passionate about clean architecture, scalable backends, and
-          solving 500+ DSA problems.
+          solving 700+ DSA problems.
         </p>
 
         {/* CTA Buttons */}

@@ -147,20 +147,20 @@ export default function ProjectsPage() {
   }, [])
 
   return (
-    <div className="bg-[#0a0b0f] w-full">
+    <div className="bg-[#0a0b0f] w-full overflow-x-hidden">
       <Navbar />
-      <div className="pt-32 px-6 pb-24">
+      <div className="pt-32 px-4 md:px-6 pb-24 max-w-[100vw]">
         {/* Page Header */}
-        <div className="max-w-7xl mx-auto px-6 mb-16">
+        <div className="max-w-7xl mx-auto mb-16">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <h1 className="section-heading mb-4">Detailed Portfolio</h1>
+            <h1 className="section-heading mb-4 text-4xl md:text-5xl">Detailed Portfolio</h1>
             <div className="section-divider mb-6" />
             <p 
-              className="text-lg max-w-2xl"
+              className="text-base md:text-lg max-w-2xl"
               style={{ fontFamily: 'DM Sans, sans-serif', color: '#888', lineHeight: 1.6 }}
             >
               A deep dive into my professional projects, showcasing architecture, technical challenges, and implementation details across various domains.
@@ -176,19 +176,19 @@ export default function ProjectsPage() {
             opacity: isVisible ? 1 : 0 
           }}
           transition={{ duration: 0.3, ease: 'easeInOut' }}
-          className="sticky z-40 mb-16 py-6 bg-[#0a0b0f]/80 backdrop-blur-xl border-b border-white/5"
+          className="sticky z-40 mb-10 md:mb-16 py-4 md:py-6 bg-[#0a0b0f]/80 backdrop-blur-xl border-b border-white/5"
         >
           <motion.div 
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="max-w-7xl mx-auto px-6 flex flex-wrap gap-3 justify-center"
+            className="max-w-7xl mx-auto flex flex-wrap gap-2 md:gap-3 justify-center"
           >
             {categories.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
-                className="relative px-6 py-2 rounded-full text-sm font-medium transition-all duration-300"
+                className="relative px-4 md:px-6 py-2 rounded-full text-xs md:text-sm font-medium transition-all duration-300"
                 style={{
                   fontFamily: 'Space Grotesk, sans-serif',
                   color: selectedCategory === cat ? '#00e0ca' : '#888',
@@ -209,9 +209,9 @@ export default function ProjectsPage() {
           </motion.div>
         </motion.div>
 
-        <div className="max-w-7xl mx-auto px-6">
+        <div className="max-w-7xl mx-auto">
           {/* Projects List */}
-          <div className="flex flex-col gap-8">
+          <div className="flex flex-col gap-10 md:gap-16">
             <AnimatePresence mode="popLayout">
               {filteredProjects.map((project, index) => {
               const isCyan = project.accent === 'cyan'
@@ -226,11 +226,11 @@ export default function ProjectsPage() {
                   exit={{ opacity: 0, scale: 0.95 }}
                   transition={{ duration: 0.4, delay: index * 0.05 }}
                 >
-                <div className={`${isCyan ? 'card-glow' : 'card-glow-purple'} rounded-3xl p-8 md:p-12 border border-white/5 shadow-2xl`}>
+                <div className={`${isCyan ? 'card-glow' : 'card-glow-purple'} rounded-3xl p-6 md:p-12 border border-white/5 shadow-2xl`}>
                   {/* Top Header */}
                   <div className="mb-10">
                     <div
-                      className="text-sm font-bold mb-3 tracking-widest uppercase"
+                      className="text-xs md:text-sm font-bold mb-3 tracking-widest uppercase"
                       style={{
                         fontFamily: 'JetBrains Mono, monospace',
                         color: accentColor,

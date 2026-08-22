@@ -153,8 +153,8 @@ export default function Skills() {
           <div className="flex flex-wrap gap-6">
             {[
               { platform: 'LeetCode', rating: 'Knight', color: '#f6c33a' },
-              { platform: 'CodeChef', rating: '3★ Rated', color: '#f97316' },
-              { platform: 'GeeksforGeeks', rating: '500+ Problems', color: '#00e0ca' },
+              { platform: 'CodeChef', rating: '4★ Rated', color: '#f97316' },
+              { platform: 'GeeksforGeeks', rating: '700+ Problems', color: '#00e0ca' },
             ].map((item) => (
               <div key={item.platform} className="text-center">
                 <div

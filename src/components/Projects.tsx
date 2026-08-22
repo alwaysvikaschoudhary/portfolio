@@ -70,7 +70,7 @@ export default function Projects() {
       className="py-24 px-6 overflow-hidden"
       style={{ background: 'linear-gradient(180deg, #0d0e14 0%, #0a0b0f 100%)' }}
     >
-      <div ref={sectionRef} className="max-w-7xl mx-auto relative px-12">
+      <div ref={sectionRef} className="max-w-7xl mx-auto relative px-0 md:px-12">
         {/* Header */}
         <div className="mb-14 flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div>
@@ -91,7 +91,7 @@ export default function Projects() {
 
           <Link
             to="/projects"
-            className="reveal stagger-4 group flex items-center gap-2 px-6 py-3 rounded-xl transition-all duration-300 hover:scale-105 active:scale-95"
+            className="reveal stagger-4 group flex items-center gap-2 px-6 py-3 rounded-xl transition-all duration-300 hover:scale-105 active:scale-95 w-fit"
             style={{
               background: 'rgba(255,255,255,0.03)',
               border: '1px solid rgba(255,255,255,0.08)',
@@ -151,7 +151,7 @@ export default function Projects() {
         </button>
 
         {/* Carousel Container */}
-        <div className="relative min-h-[700px] md:min-h-[600px]">
+        <div className="relative min-h-[850px] md:min-h-[600px] w-full">
           <AnimatePresence initial={false} custom={direction} mode="wait">
             <motion.div
               key={currentIndex}
@@ -164,7 +164,7 @@ export default function Projects() {
                 x: { type: 'spring', stiffness: 300, damping: 30 },
                 opacity: { duration: 0.3 },
               }}
-              className="absolute inset-0 flex justify-center"
+              className="absolute inset-0 flex justify-center w-full"
             >
               {visibleProjects.map((project, index) => {
                 const isCyan = project.accent === 'cyan'
@@ -173,11 +173,11 @@ export default function Projects() {
                 return (
                   <div
                     key={`${project.name}-${index}`}
-                    className={`${isCyan ? 'card-glow' : 'card-glow-purple'} rounded-2xl p-8 md:p-10 flex flex-col lg:flex-row h-full max-w-5xl w-full shadow-2xl transition-all duration-500 gap-10`}
+                    className={`${isCyan ? 'card-glow' : 'card-glow-purple'} rounded-2xl p-5 md:p-10 flex flex-col lg:flex-row h-full max-w-5xl w-full shadow-2xl transition-all duration-500 gap-6 md:gap-10`}
                   >
                     {/* Project Left side: Content */}
-                    <div className="flex-1 flex flex-col">
-                      <div className="flex items-start justify-between mb-6">
+                    <div className="flex-1 flex flex-col order-2 lg:order-1">
+                      <div className="flex items-start justify-between mb-6 gap-4">
                         <div>
                           <div
                             className="text-xs md:text-sm font-bold mb-2 tracking-widest uppercase"
@@ -290,7 +290,7 @@ export default function Projects() {
                     </div>
 
                     {/* Project Right side: Image Preview */}
-                    <div className="flex-1 hidden lg:flex items-center justify-center">
+                    <div className="flex-1 flex items-center justify-center order-1 lg:order-2 w-full">
                       <div className="relative group/img w-full">
                         <div 
                           className="absolute -inset-1 rounded-2xl blur-xl opacity-20 group-hover/img:opacity-40 transition-opacity duration-500"
@@ -301,7 +301,7 @@ export default function Projects() {
                             <img 
                               src={project.image} 
                               alt={project.name} 
-                              className="w-full h-auto object-cover"
+                              className="w-full h-auto object-cover max-h-[300px] md:max-h-[500px] object-top"
                             />
                           ) : (
                             <div 

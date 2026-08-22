@@ -3,6 +3,7 @@ import { Menu, X } from 'lucide-react'
 import { useNavigate, useLocation } from '@tanstack/react-router'
 
 const navLinks = [
+  { label: 'Home', href: '#home' },
   { label: 'About', href: '#about' },
   { label: 'Experience', href: '#experience' },
   { label: 'Projects', href: '#projects' },
@@ -13,7 +14,7 @@ const navLinks = [
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
-  const [activeSection, setActiveSection] = useState('')
+  const [activeSection, setActiveSection] = useState('home')
   const [mobileOpen, setMobileOpen] = useState(false)
   const navigate = useNavigate()
   const location = useLocation()
@@ -24,14 +25,21 @@ export default function Navbar() {
 
       // Active section detection
       const sections = navLinks.map((l) => l.href.slice(1))
-      let current = ''
+      let current = 'home'
       for (const id of sections) {
+        if (id === 'home') continue
         const el = document.getElementById(id)
         if (el) {
           const rect = el.getBoundingClientRect()
           if (rect.top <= 120) current = id
         }
       }
+      
+      // If we're at the very top, set active to home
+      if (window.scrollY < 100) {
+        current = 'home'
+      }
+      
       setActiveSection(current)
     }
 
@@ -44,7 +52,12 @@ export default function Navbar() {
     const sectionId = href.slice(1)
 
     if (location.pathname !== '/') {
-      navigate({ to: '/', hash: sectionId })
+      navigate({ to: '/', hash: sectionId === 'home' ? '' : sectionId })
+      return
+    }
+
+    if (sectionId === 'home') {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
       return
     }
 
@@ -65,7 +78,7 @@ export default function Navbar() {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        className={`fixed top-0 left-0 right-0 z-[60] transition-all duration-500 ${
           scrolled ? 'glass py-3 shadow-lg' : 'py-5'
         }`}
         style={{
@@ -127,7 +140,7 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       <div
-        className={`fixed inset-0 z-40 transition-all duration-300 md:hidden ${
+        className={`fixed inset-0 z-[55] transition-all duration-300 md:hidden ${
           mobileOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         }`}
         style={{ background: 'rgba(10, 11, 15, 0.97)', backdropFilter: 'blur(20px)' }}

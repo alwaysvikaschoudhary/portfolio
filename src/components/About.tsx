@@ -20,7 +20,7 @@ const highlights = [
   {
     icon: <Zap size={22} />,
     title: 'DSA & Problem Solving',
-    desc: '500+ LeetCode & GFG problems',
+    desc: '700+ LeetCode & GFG problems',
   },
 ]
 
@@ -75,14 +75,14 @@ export default function About() {
               }}
             >
               Beyond code, I'm a{' '}
-              <span style={{ color: '#00e0ca' }}>Knight on LeetCode</span>, a 3★ CodeChef coder, and
+              <span style={{ color: '#00e0ca' }}>Knight on LeetCode</span>, a 4★ CodeChef coder, and
               a volleyball champion who leads teams both on the field and in the codebase.
             </p>
 
             {/* Stats row */}
             <div className="flex flex-wrap gap-8 mt-8">
               {[
-                { value: '500+', label: 'DSA Problems' },
+                { value: '700+', label: 'DSA Problems' },
                 { value: '5+', label: 'Production Events' },
                 { value: '30%', label: 'Perf Improvement' },
               ].map((stat, i) => (

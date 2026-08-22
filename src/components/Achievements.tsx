@@ -15,9 +15,9 @@ const achievements = [
   {
     icon: <Code2 size={24} />,
     title: 'Data Structures & Algorithms',
-    subtitle: 'LeetCode Knight | CodeChef 3★ | 500+ Problems',
+    subtitle: 'LeetCode Knight | CodeChef 3★ | 700+ Problems',
     description:
-      'Solved 500+ DSA problems across LeetCode and GeeksforGeeks with strong focus on arrays, graphs, and trees. Achieved Knight rating on LeetCode and 3★ on CodeChef.',
+      'Solved 700+ DSA problems across LeetCode and GeeksforGeeks with strong focus on arrays, graphs, and trees. Achieved Knight rating on LeetCode and 4★ on CodeChef.',
     highlight: 'Knight on LeetCode',
     color: 'purple',
     badge: '⚡',
